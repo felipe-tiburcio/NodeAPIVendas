@@ -38,16 +38,6 @@ export default class ProductsController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
-
-    const deleteProduct = new DeleteProductService();
-
-    await deleteProduct.execute({ id });
-
-    return response.json([]);
-  }
-
-  public async delete(request: Request, response: Response): Promise<Response> {
     const { name, price, quantity } = request.body;
     const { id } = request.params;
 
@@ -61,5 +51,15 @@ export default class ProductsController {
     });
 
     return response.json(product);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteProduct = new DeleteProductService();
+
+    await deleteProduct.execute({ id });
+
+    return response.json();
   }
 }
